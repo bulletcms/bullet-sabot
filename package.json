@@ -4,7 +4,8 @@
   "description": "a web server for bullet-cms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel --presets es2015,stage-2 src -d lib"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/bulletcms/bullet-sabot/issues"
   },
-  "homepage": "https://github.com/bulletcms/bullet-sabot#readme"
+  "homepage": "https://github.com/bulletcms/bullet-sabot#readme",
+  "dependencies": {
+    "koa": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0"
+  }
 }
