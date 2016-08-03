@@ -1,0 +1,19 @@
+{
+  "name": "bullet-sabot",
+  "version": "0.1.0",
+  "description": "a web server for bullet-cms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bulletcms/bullet-sabot.git"
+  },
+  "author": "xorkevin",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/bulletcms/bullet-sabot/issues"
+  },
+  "homepage": "https://github.com/bulletcms/bullet-sabot#readme"
+}
