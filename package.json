@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel --presets es2015,stage-2 src -d lib"
+    "build": "babel --presets es2015,stage-2 -w src -d lib",
+    "start": "nodemon --harmony lib/index.js",
+    "dev": "concurrently --kill-others 'npm run build' 'npm run start'"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
     "babel-cli": "^6.11.4",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-2": "^6.11.0"
+    "babel-preset-stage-2": "^6.11.0",
+    "concurrently": "^2.2.0",
+    "nodemon": "^1.10.0"
   }
 }
