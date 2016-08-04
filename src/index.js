@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
+import BodyParser from 'koa-bodyparser';
 
 const app = new Koa();
 const router = new Router();
@@ -9,19 +10,23 @@ const requestTimeLogger = async (ctx, next)=>{
   const timeStart = new Date();
   await next();
   const timeElapsed = Date.now() - timeStart.getTime();
-  console.log(`request at ${timeStart}, time elapsed: ${timeElapsed}ms`);
+  console.log(`${timeStart} | ${ctx.method} ${ctx.url}, time elapsed: ${timeElapsed}ms`);
 };
 
-const helloWorld = async (ctx, next)=>{
-  ctx.body = 'Hello World!';
+const echo = async (ctx, next)=>{
+  ctx.body = ctx.request.body;
   await next();
 };
 
 router
-  .get('/', helloWorld);
+  .get('*', echo)
+  .post('*', echo)
+  .put('*', echo)
+  .del('*', echo);
 
 app
   .use(requestTimeLogger)
+  .use(BodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 

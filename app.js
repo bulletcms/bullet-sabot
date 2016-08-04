@@ -1,3 +1,5 @@
 const app = require('./lib').app;
 
-app.listen(3000, () => console.log('server launched on localhost:3000'));
+const port = 5000;
+
+app.listen(port, () => console.log('server launched on localhost:'+port));
