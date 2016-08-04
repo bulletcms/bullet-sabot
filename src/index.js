@@ -7,4 +7,4 @@ app.use(async (ctx) => {
   ctx.body = 'Hello World!';
 });
 
-export default {app};
+export {app};
