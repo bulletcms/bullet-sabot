@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel --presets es2015,stage-2 -w src -d lib",
-    "start": "nodemon --harmony lib/index.js",
+    "start": "nodemon --harmony app.js",
     "dev": "concurrently --kill-others 'npm run build' 'npm run start'"
   },
   "repository": {
