@@ -1,16 +1,22 @@
 import {Repository} from './repo';
 
+const NotDefined = Symbol('NotDefined');
+const Delete = Symbol('Delete');
+
 const theRepo = {
 
 };
 
-const traverse = (object, sector, data, update=false)=>{
+const traverse = (object, sector, data=NotDefined, update=false)=>{
   if(typeof sector == 'string'){
     return traverse(object, sector.split('.'), data);
   } else if(sector.length > 0){
     return traverse(object[sector.shift()], sector, data);
   } else {
-    if(data != undefined){
+    if(data == Delete){
+      delete object;
+      return undefined;
+    } else if(data != NotDefined){
       if(update){
         object = {...object, ...data};
       } else {
@@ -30,6 +36,10 @@ class MockRepo extends Repository{
     return traverse(theRepo, sector+'.'+id);
   }
 
+  retrieve(sector, quantity){
+    return traverse(theRepo, sector).keys();
+  }
+
   store(sector, id, data){
     traverse(theRepo, sector+'.'+id, data);
   }
@@ -39,7 +49,7 @@ class MockRepo extends Repository{
   }
 
   remove(sector, id){
-    traverse(theRepo, sector+'.'+id, null);
+    traverse(theRepo, sector+'.'+id, Delete);
   }
 }
 
