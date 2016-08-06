@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel --presets es2015,stage-2 -w src -d lib",
+    "build": "babel --presets es2015,stage-2 -w src/index.js -o lib/index.js",
     "start": "nodemon --harmony app.js",
     "dev": "concurrently --kill-others 'npm run build' 'npm run start'"
   },
