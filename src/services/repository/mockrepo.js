@@ -4,32 +4,98 @@ const NotDefined = Symbol('NotDefined');
 const Delete = Symbol('Delete');
 
 const theRepo = {
-
+  'Pages': {
+    'kevin': {
+      'title': 'Kevin',
+      'tags': [],
+      'content': [
+        {
+          'component': 'h1',
+          'children': 'Kevin'
+        },
+        {
+          'component': 'p',
+          'children': 'Hi, I am Kevin'
+        },
+        {
+          'component': 'DateView',
+          'props': {
+            'date': 1460146245,
+            'author': 'xorkevin'
+          }
+        }
+      ]
+    },
+    'about': {
+      'title': 'About',
+      'tags': [],
+      'content': [
+        {
+          'component': 'h1',
+          'children': 'About'
+        },
+        {
+          'component': 'p',
+          'children': 'BulletAPI is a minimal and configural system for content management.'
+        },
+        {
+          'component': 'DateView',
+          'props': {
+            'date': 1461113451,
+            'author': 'xorkevin'
+          }
+        }
+      ]
+    },
+    'indexroute': {
+      'title': 'BulletAPI',
+      'tags': [],
+      'content': [
+        {
+          'component': 'h1',
+          'children': 'BulletAPI'
+        },
+        {
+          'component': 'p',
+          'children': 'Hello World!'
+        },
+        {
+          'component': 'DateView',
+          'props': {
+            'date': 1461052472,
+            'author': 'xorkevin'
+          }
+        }
+      ]
+    }
+  }
 };
 
 const traverse = (object, sector, data=NotDefined, update=false)=>{
   if(typeof sector == 'string'){
     return traverse(object, sector.split('.'), data);
-  } else if(sector.length > 0){
+  } else if(sector.length > 1){
     return traverse(object[sector.shift()], sector, data);
+  } else if(sector.length == 0){
+    return object;
   } else {
     if(data == Delete){
-      delete object;
+      delete object[sector[0]];
       return undefined;
     } else if(data != NotDefined){
       if(update){
-        object = {...object, ...data};
+        object[sector[0]] = {...object[sector[0]], ...data};
       } else {
-        object = {...data};
+        object[sector[0]] = {...data};
       }
     }
-    return object;
+    return object[sector[0]];
   }
 };
 
 class MockRepo extends Repository{
   constructor(){
-
+    super();
   }
 
   retrieve(sector, id){

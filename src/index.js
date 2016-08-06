@@ -3,8 +3,17 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
 
+import {MockRepo} from 'services/repository';
+
+import {pages} from 'routes';
+
+
 const app = new Koa();
-const router = new Router();
+
+app.context.services = {
+  repository: new MockRepo()
+};
+
 
 const requestTimeLogger = async (ctx, next)=>{
   const timeStart = new Date();
@@ -18,11 +27,13 @@ const echo = async (ctx, next)=>{
   await next();
 };
 
+
+const router = new Router({
+  prefix: '/api'
+});
+
 router
-  .get('*', echo)
-  .post('*', echo)
-  .put('*', echo)
-  .del('*', echo);
+  .use('/pages', pages.routes(), pages.allowedMethods());
 
 app
   .use(requestTimeLogger)
