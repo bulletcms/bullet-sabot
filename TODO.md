@@ -1,3 +1,4 @@
 # TODO
 
-- [ ] implement webpack build system
+- [x] implement webpack build system
+- [ ] npm index.js must create module to run app
