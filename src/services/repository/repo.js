@@ -1,4 +1,4 @@
-import {abstractMethod} from 'util';
+import {abstractMethod} from 'utility';
 
 class Repository {
   /**

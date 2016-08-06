@@ -23,7 +23,7 @@ module.exports = {
     alias: {
 
     },
-    extensions: ['', '.js', 'index.js']
+    extensions: ['', '.js']
   },
   externals: [nodeExternals()]
 };

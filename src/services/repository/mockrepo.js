@@ -102,8 +102,8 @@ class MockRepo extends Repository{
     return traverse(theRepo, sector+'.'+id);
   }
 
-  retrieve(sector, quantity){
-    return traverse(theRepo, sector).keys();
+  retrieveSector(sector, quantity){
+    return Object.keys(traverse(theRepo, sector));
   }
 
   store(sector, id, data){
