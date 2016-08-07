@@ -36,14 +36,13 @@ app routes
 const router = new Router();
 
 router
-  .use('/api', api.routes(), api.allowedMethods());
+  .use('/api', BodyParser(), api.routes(), api.allowedMethods());
 
 /**
 middleware
 */
 app
   .use(Logger())
-  .use(BodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 
