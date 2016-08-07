@@ -2,41 +2,47 @@ import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
+import Logger from 'koa-logger';
 
 import {MockRepo} from 'services/repository';
-
 import {pages} from 'routes';
 
-
+/**
+application
+*/
 const app = new Koa();
 
+
+/**
+dependencies
+*/
 app.context.services = {
   repository: new MockRepo()
 };
 
 
-const requestTimeLogger = async (ctx, next)=>{
-  const timeStart = new Date();
-  await next();
-  const timeElapsed = Date.now() - timeStart.getTime();
-  console.log(`${timeStart} | ${ctx.method} ${ctx.url}, time elapsed: ${timeElapsed}ms`);
-};
+/**
+api routes
+*/
+const api = new Router();
 
-const echo = async (ctx, next)=>{
-  ctx.body = ctx.request.body;
-  await next();
-};
-
-
-const router = new Router({
-  prefix: '/api'
-});
-
-router
+api
   .use('/pages', pages.routes(), pages.allowedMethods());
 
+
+/**
+app routes
+*/
+const router = new Router();
+
+router
+  .use('/api', api.routes(), api.allowedMethods());
+
+/**
+middleware
+*/
 app
-  .use(requestTimeLogger)
+  .use(Logger())
   .use(BodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
