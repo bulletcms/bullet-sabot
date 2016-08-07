@@ -1,4 +1,6 @@
 # TODO
 
 - [x] implement webpack build system
-- [ ] npm index.js must create module to run app
+- [x] npm index.js must create module to run app
+- [ ] cache and compress
+- [ ] authentication middleware
