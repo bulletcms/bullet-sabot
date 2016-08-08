@@ -5,11 +5,12 @@ import BodyParser from 'koa-bodyparser';
 import Logger from 'koa-logger';
 
 import {MockRepo} from 'services/repository';
+import {GoogleAuth} from 'services/authentication';
 import {pages} from 'routes';
 
 
 class Sabot {
-  constructor(){
+  constructor(authClientSecret){
     /**
     application
     */
@@ -19,7 +20,8 @@ class Sabot {
     dependencies
     */
     this.app_.context.services = {
-      repository: new MockRepo()
+      repository   : new MockRepo(),
+      authentcation: new GoogleAuth(authClientSecret),
     };
 
     /**

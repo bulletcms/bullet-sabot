@@ -7,7 +7,7 @@ class Authentication {
       token - user identification information
 
     returns:
-      user information | false
+      user information | false, error
     */
     abstractMethod();
   }
