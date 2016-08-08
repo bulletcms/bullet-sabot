@@ -93,7 +93,7 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
   }
 };
 
-class MockRepo extends Repository{
+class MockRepo extends Repository {
   constructor(){
     super();
   }
