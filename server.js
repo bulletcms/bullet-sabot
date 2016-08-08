@@ -1,5 +1,7 @@
-const app = require('./lib').app;
+const Sabot = require('./lib').Sabot;
 
 const port = 5000;
 
-app.listen(port, () => console.log('server launched on localhost:'+port));
+const sabot = new Sabot();
+
+sabot.listen(port);
