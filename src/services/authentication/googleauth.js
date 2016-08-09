@@ -7,7 +7,7 @@ class GoogleAuth extends Authentication {
   }
 
   verify(token){
-    
+
   }
 }
 
