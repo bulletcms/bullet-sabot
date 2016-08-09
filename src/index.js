@@ -6,11 +6,13 @@ import Logger from 'koa-logger';
 
 import {MockRepo} from 'services/repository';
 import {GoogleAuth} from 'services/authentication';
+
 import {pages} from 'routes';
 
+const Services = {MockRepo, GoogleAuth};
 
 class Sabot {
-  constructor(authClientSecret){
+  constructor(dependencies){
     /**
     application
     */
@@ -19,10 +21,7 @@ class Sabot {
     /**
     dependencies
     */
-    this.app_.context.services = {
-      repository   : new MockRepo(),
-      authentcation: new GoogleAuth(authClientSecret),
-    };
+    this.app_.context.services = dependencies;
 
     /**
     api routes
@@ -54,5 +53,4 @@ class Sabot {
   }
 }
 
-
-export {Sabot};
+export {Sabot, Services};

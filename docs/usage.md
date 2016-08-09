@@ -1,4 +1,9 @@
-const BulletSabot = require('./lib');
+# Usage
+
+## Setup
+
+```js
+const BulletSabot = require('bullet-sabot');
 const Sabot = BulletSabot.Sabot;
 const Services = BulletSabot.Services;
 
@@ -8,3 +13,8 @@ const sabot = new Sabot({
 });
 
 sabot.listen(5000);
+```
+
+## Included Services
+
+#### `GoogleAuth(client_secret.json)`
