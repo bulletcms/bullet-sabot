@@ -77,8 +77,8 @@ const theRepo = {
       'email': 'example@example.com',
       'emailVerified': true,
       'profilePicture': false,
-      'tags': ['admin'],
-      'public': ['name', 'lastName', 'fullName', 'profilePicture']
+      'tags': ['admin', 'mod', 'editor', 'user'],
+      'public': ['name', 'lastName', 'fullName', 'profilePicture', 'tags']
     }
   }
 };
