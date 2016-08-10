@@ -37,11 +37,28 @@ class GoogleAuth extends Authentication {
     const cert = await getGoogleCerts(KId);
 
     const options = {
-      audience: this.clientSecret_.client_id
-    }
-    const issuers = ['accounts.google.com', 'https://accounts.google.com'];
+      audience: this.clientSecret_.client_id,
+      issuer: ['accounts.google.com', 'https://accounts.google.com']
+    };
 
-    jwt.verify(token, cert, options, )
+    try {
+      const decoded = jwt.verify(token, cert, options);
+      if(issuers.indexOf(decoded.payload.iss) == -1){
+        return false;
+      } else {
+        const payload = decoded.payload;
+
+        const name = payload.given_name;
+        const fullName = payload.name;
+        const lastName = payload.family_name;
+        const email = payload.email;
+        const emailVerified = payload.email_verified;
+        const profilePicture = payload.picture;
+        return {name, fullName, lastName, email, emailVerified, profilePicture};
+      }
+    } catch(err){
+      return false;
+    }
   }
 }
 
