@@ -68,6 +68,18 @@ const theRepo = {
         }
       ]
     }
+  },
+  'Users': {
+    'xorkevin': {
+      'name': 'Kevin',
+      'lastName': 'Wang',
+      'fullName': 'Kevin Wang',
+      'email': 'example@example.com',
+      'emailVerified': true,
+      'profilePicture': false,
+      'tags': ['admin'],
+      'public': ['name', 'lastName', 'fullName', 'profilePicture']
+    }
   }
 };
 

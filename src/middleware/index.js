@@ -1,6 +1,4 @@
-const echo = async (ctx, next)=>{
-  ctx.body = ctx.request.body;
-  await next();
-};
+import {echo} from './echo';
+import {authenticate} from './authentication';
 
-export {requestTimeLogger, echo};
+export {echo, authenticate};
