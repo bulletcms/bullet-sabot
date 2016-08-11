@@ -6,3 +6,4 @@
 - [ ] authentication middleware
   - [ ] https
 - [ ] find better node request library, request@latest has error "define cannot be used indirect"
+- [ ] authenticator should allow input of middleware for the checking of resource ownership

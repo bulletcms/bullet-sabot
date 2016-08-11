@@ -1,4 +1,4 @@
 import {echo} from './echo';
-import {authenticate} from './authentication';
+import {Authenticator} from './authentication';
 
-export {echo, authenticate};
+export {echo, Authenticator};
