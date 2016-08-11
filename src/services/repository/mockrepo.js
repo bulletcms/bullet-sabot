@@ -71,6 +71,7 @@ const theRepo = {
   },
   'Users': {
     'xorkevin': {
+      'username': 'xorkevin',
       'name': 'Kevin',
       'lastName': 'Wang',
       'fullName': 'Kevin Wang',

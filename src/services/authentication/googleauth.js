@@ -43,7 +43,7 @@ class GoogleAuth extends Authentication {
 
     try {
       const decoded = jwt.verify(token, cert, options);
-      if(issuers.indexOf(decoded.payload.iss) == -1){
+      if(issuers.indexOf(decoded.payload.iss) < 0){
         return false;
       } else {
         const payload = decoded.payload;
@@ -53,8 +53,9 @@ class GoogleAuth extends Authentication {
         const lastName = payload.family_name;
         const email = payload.email;
         const emailVerified = payload.email_verified;
+        const googleId = payload.sub;
         const profilePicture = payload.picture;
-        return {name, fullName, lastName, email, emailVerified, profilePicture};
+        return {name, fullName, lastName, email, emailVerified, googleId, profilePicture};
       }
     } catch(err){
       return false;
