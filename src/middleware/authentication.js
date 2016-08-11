@@ -1,19 +1,56 @@
-const Authenticator = (user, permissionTiers)=>{
+const Authenticator = (userCheck, permissionTiers)=>{
   /**
-  user - username of allowed user
+  userCheck - function that takes a username, checks user ownership for a resource, and returns if valid
   permissionTiers - array of accepted tiers from most common to least
   */
   return async (ctx, next)=>{
     const {authentication, repository} = ctx.services;
     const {username, idToken} = ctx.request.body;
-    const {googleId} = await authentication.verify(idToken);
-    const profile = await repository.retrieve(username);
-    if( (profile.googleId == googleId) && ((user && user == profile.username) || (permissionTiers && permissionTiers.filter((tier)=>{
-      return profile.tags.indexOf(tier) > -1;
-    }).length > 0)) ){
-      // if request's user is granted access because of ownership or user is a part of the permissionTiers
-      await next();
+
+    const reqUser = await authentication.verify(idToken);
+
+    // if idToken is not valid
+    if(!reqUser){
+      return;
     }
+
+    const user = await repository.retrieve(username);
+
+    // if username is invalid
+    if(!user){
+      return;
+    }
+
+    // if username does not match idToken
+    if(user.googleId == reqUser.googleId){
+      return;
+    }
+
+    // if userCheck present
+    if(userCheck){
+      const validUserCheck = await userCheck(user.username);
+      // if userCheck not valid
+      if(!validUserCheck){
+        return;
+      }
+
+      // or if permissionTiers present
+    } else if(permissionTiers){
+      let intersection = false;
+      for(let i of permissionTiers){
+        if(user.tags.indexOf(i) > -1){
+          intersection = true;
+          break;
+        }
+      }
+
+      // if there is no intersection of permissionTiers and user tags
+      if(!intersection){
+        return;
+      }
+    }
+
+    await next();
   };
 };
 
