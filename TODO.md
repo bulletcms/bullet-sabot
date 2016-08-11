@@ -2,8 +2,9 @@
 
 - [x] implement webpack build system
 - [x] npm index.js must create module to run app
+- [x] authentication middleware
+  - [x] authenticator should allow input of middleware for the checking of resource ownership
+- [ ] https
 - [ ] cache and compress
-- [ ] authentication middleware
-  - [ ] https
+- [ ] schemapack
 - [ ] find better node request library, request@latest has error "define cannot be used indirect"
-- [ ] authenticator should allow input of middleware for the checking of resource ownership

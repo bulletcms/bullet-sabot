@@ -18,7 +18,13 @@ pages
     ctx.body = repository.retrieve(Sector, ctx.params.pageId);
     await next();
   })
-  .post('/', async (ctx, next)=>{
+  .post('/', authentication, async (ctx, next)=>{
+
+  })
+  .put('/:pageId', authentication, async (ctx, next)=>{
+
+  })
+  .del('/:pageId', authentication, async (ctx, next)=>{
 
   });
 

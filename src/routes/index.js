@@ -1,3 +1,4 @@
+import {users} from './users';
 import {pages} from './pages';
 
-export {pages};
+export {users, pages};
