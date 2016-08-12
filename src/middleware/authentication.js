@@ -1,6 +1,6 @@
 const Authenticator = (userCheck, permissionTiers)=>{
   /**
-  userCheck - function that takes a username, checks user ownership for a resource, and returns if valid
+  userCheck - function that takes a username, params, and services, checks user ownership for a resource, and returns if valid
   permissionTiers - array of accepted tiers from most common to least
   */
   return async (ctx, next)=>{
@@ -28,7 +28,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
 
     // if userCheck present
     if(userCheck){
-      const validUserCheck = await userCheck(user.username);
+      const validUserCheck = await userCheck(user.username, ctx.params, ctx.services);
       // if userCheck not valid
       if(!validUserCheck){
         return;

@@ -10,12 +10,12 @@ const pages = new Router();
 pages
   .get('/', async (ctx, next)=>{
     const {repository} = ctx.services;
-    ctx.body = repository.retrieveSector(Sector);
+    ctx.body = await repository.retrieveSector(Sector);
     await next();
   })
   .get('/:pageId', async (ctx, next)=>{
     const {repository} = ctx.services;
-    ctx.body = repository.retrieve(Sector, ctx.params.pageId);
+    ctx.body = await repository.retrieve(Sector, ctx.params.pageId);
     await next();
   })
   .post('/', authentication, async (ctx, next)=>{

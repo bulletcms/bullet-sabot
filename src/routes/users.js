@@ -3,7 +3,10 @@ import {Authenticator} from 'middleware';
 
 const Sector = 'Pages';
 
-const authentication = Authenticator(false, ['admin']);
+const authentication = Authenticator(async (username, params, services)=>{
+  const {username: userId} = params;
+  return username == userId;
+}, ['admin']);
 
 const users = new Router();
 
