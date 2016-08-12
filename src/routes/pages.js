@@ -10,12 +10,22 @@ const pages = new Router();
 pages
   .get('/', async (ctx, next)=>{
     const {repository} = ctx.services;
-    ctx.body = await repository.retrieveSector(Sector);
+    const retrievedPages = await repository.retrieveSector(Sector);
+    if(!retrievedPages){
+
+    } else {
+      ctx.body = retrievedPages;
+    }
     await next();
   })
   .get('/:pageId', async (ctx, next)=>{
     const {repository} = ctx.services;
-    ctx.body = await repository.retrieve(Sector, ctx.params.pageId);
+    const retrievedPage = await repository.retrieve(Sector, ctx.params.pageId);
+    if(!retrievedPage){
+      
+    } else {
+      ctx.body = retrievedPage;
+    }
     await next();
   })
   .post('/', authentication, async (ctx, next)=>{

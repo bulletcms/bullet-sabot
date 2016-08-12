@@ -13,7 +13,7 @@ class Repository {
   retrieve(sector, id){
     /**
     gets item
-    returns item
+    returns item or false
     */
     abstractMethod();
   }
@@ -21,7 +21,7 @@ class Repository {
   retrieveSector(sector, quantity){
     /**
     gets item keys of a sector
-    returns array of keys
+    returns array of keys or false
     */
     abstractMethod();
   }
@@ -29,6 +29,7 @@ class Repository {
   store(sector, id, data){
     /**
     stores item
+    returns new data or false
     */
     abstractMethod();
   }
@@ -36,6 +37,7 @@ class Repository {
   update(sector, id, data){
     /**
     update item
+    returns new data or false
     */
     abstractMethod();
   }
@@ -43,6 +45,7 @@ class Repository {
   remove(sector, id){
     /**
     delete item
+    returns true if deleted or false
     */
     abstractMethod();
   }

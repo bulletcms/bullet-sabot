@@ -88,13 +88,19 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
   if(typeof sector == 'string'){
     return traverse(object, sector.split('.'), data);
   } else if(sector.length > 1){
+    if(!object[sector[0]]){
+      return false;
+    }
     return traverse(object[sector.shift()], sector, data);
   } else if(sector.length == 0){
     return object;
   } else {
+    if(!object[sector[0]]){
+      return false;
+    }
     if(data == Delete){
       delete object[sector[0]];
-      return undefined;
+      return true;
     } else if(data != NotDefined){
       if(update){
         object[sector[0]] = {...object[sector[0]], ...data};
@@ -116,19 +122,23 @@ class MockRepo extends Repository {
   }
 
   retrieveSector(sector, quantity){
-    return Object.keys(traverse(theRepo, sector));
+    const sec = traverse(theRepo, sector);
+    if(!sec){
+      return false;
+    }
+    return Object.keys(sec);
   }
 
   store(sector, id, data){
-    traverse(theRepo, sector+'.'+id, data);
+    return traverse(theRepo, sector+'.'+id, data);
   }
 
   update(sector, id, data){
-    traverse(theRepo, sector+'.'+id, data, true);
+    return traverse(theRepo, sector+'.'+id, data, true);
   }
 
   remove(sector, id){
-    traverse(theRepo, sector+'.'+id, Delete);
+    return traverse(theRepo, sector+'.'+id, Delete);
   }
 }
 
