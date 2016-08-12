@@ -95,18 +95,27 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
   } else if(sector.length == 0){
     return object;
   } else {
-    if(!object[sector[0]]){
-      return false;
-    }
     if(data == Delete){
+      if(!object[sector[0]]){
+        return false;
+      }
       delete object[sector[0]];
       return true;
     } else if(data != NotDefined){
       if(update){
+        if(!object[sector[0]]){
+          return false;
+        }
         object[sector[0]] = {...object[sector[0]], ...data};
       } else {
+        if(object[sector[0]]){
+          return false;
+        }
         object[sector[0]] = {...data};
       }
+    }
+    if(!object[sector[0]]){
+      return false;
     }
     return object[sector[0]];
   }

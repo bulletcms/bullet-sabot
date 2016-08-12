@@ -29,7 +29,7 @@ class Repository {
   store(sector, id, data){
     /**
     stores item
-    returns new data or false
+    returns new data or false if id already exists
     */
     abstractMethod();
   }

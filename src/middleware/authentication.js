@@ -11,6 +11,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
 
     // if idToken is not valid
     if(!reqUser){
+      ctx.status = 403;
       return;
     }
 
@@ -18,11 +19,13 @@ const Authenticator = (userCheck, permissionTiers)=>{
 
     // if username is invalid
     if(!user){
+      ctx.status = 403;
       return;
     }
 
     // if username does not match idToken
     if(user.googleId == reqUser.googleId){
+      ctx.status = 403;
       return;
     }
 
@@ -31,6 +34,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
       const validUserCheck = await userCheck(user.username, ctx.params, ctx.services);
       // if userCheck not valid
       if(!validUserCheck){
+        ctx.status = 403;
         return;
       }
 
@@ -46,6 +50,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
 
       // if there is no intersection of permissionTiers and user tags
       if(!intersection){
+        ctx.status = 403;
         return;
       }
     }

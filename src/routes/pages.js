@@ -12,7 +12,7 @@ pages
     const {repository} = ctx.services;
     const retrievedPages = await repository.retrieveSector(Sector);
     if(!retrievedPages){
-
+      ctx.status = 404;
     } else {
       ctx.body = retrievedPages;
     }
@@ -22,7 +22,7 @@ pages
     const {repository} = ctx.services;
     const retrievedPage = await repository.retrieve(Sector, ctx.params.pageId);
     if(!retrievedPage){
-      
+      ctx.status = 404;
     } else {
       ctx.body = retrievedPage;
     }
