@@ -35,7 +35,12 @@ users
   })
   .post('/', async (ctx, next)=>{
     const {repository} = ctx.services;
-
+    const storedUser = await repository.store(Sector, ctx.request.username, ctx.request.body);
+    if(!storedUser){
+      ctx.status = 403;
+    } else {
+      ctx.body = {username: storedUser.username, status: true};
+    }
   })
   .put('/:username', authentication, async (ctx, next)=>{
 

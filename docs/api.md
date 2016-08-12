@@ -30,6 +30,6 @@ response:
 ```json
 {
   "title": "Page Name",
-  "status": "<success | fail>"
+  "status": "<true | false>"
 }
 ```
