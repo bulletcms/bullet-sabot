@@ -19,7 +19,7 @@ users
     } else {
       const returnedUser = {};
       for(let i of retrievedUser.public){
-        returnedUser[i] = user[i];
+        returnedUser[i] = retrievedUser[i];
       }
       ctx.body = returnedUser;
     }
@@ -35,7 +35,7 @@ users
   })
   .post('/', async (ctx, next)=>{
     const {repository} = ctx.services;
-    const storedUser = await repository.store(Sector, ctx.request.username, ctx.request.body);
+    const storedUser = await repository.store(Sector, ctx.request.body.username, ctx.request.body);
     if(!storedUser){
       ctx.status = 403;
     } else {
