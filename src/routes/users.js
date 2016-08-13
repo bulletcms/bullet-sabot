@@ -43,10 +43,22 @@ users
     }
   })
   .put('/:username', authentication, async (ctx, next)=>{
-
+    const {repository} = ctx.services;
+    const updatedUser = await repository.update(Sector, ctx.request.body.username, ctx.request.body);
+    if(!updatedUser){
+      ctx.status = 403;
+    } else {
+      ctx.body = {username: updatedUser.username, status: true};
+    }
   })
   .del('/:username', authentication, async (ctx, next)=>{
-
+    const {repository} = ctx.services;
+    const removedUser = await repository.remove(Sector, ctx.request.body.username);
+    if(!removedUser){
+      ctx.status = 403;
+    } else {
+      ctx.body = {username: removedUser.username, status: true};
+    }
   });
 
 export {users};

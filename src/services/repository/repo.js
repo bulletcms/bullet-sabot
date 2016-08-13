@@ -45,7 +45,7 @@ class Repository {
   remove(sector, id){
     /**
     delete item
-    returns true if deleted or false
+    returns deleted data or false
     */
     abstractMethod();
   }

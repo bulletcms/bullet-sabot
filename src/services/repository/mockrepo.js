@@ -99,8 +99,9 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
       if(!object[sector[0]]){
         return false;
       }
+      const deleted = object[sector[0]];
       delete object[sector[0]];
-      return true;
+      return deleted;
     } else if(data != NotDefined){
       if(update){
         if(!object[sector[0]]){
