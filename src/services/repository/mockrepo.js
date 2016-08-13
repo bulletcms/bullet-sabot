@@ -6,6 +6,7 @@ const Delete = Symbol('Delete');
 const theRepo = {
   'Pages': {
     'kevin': {
+      'pageid': 'kevin',
       'title': 'Kevin',
       'tags': [],
       'content': [
@@ -27,6 +28,7 @@ const theRepo = {
       ]
     },
     'about': {
+      'pageid': 'about',
       'title': 'About',
       'tags': [],
       'content': [
@@ -48,6 +50,7 @@ const theRepo = {
       ]
     },
     'indexroute': {
+      'pageid': 'indexroute',
       'title': 'BulletAPI',
       'tags': [],
       'content': [

@@ -29,13 +29,31 @@ pages
     await next();
   })
   .post('/', authentication, async (ctx, next)=>{
-
+    const {repository} = ctx.services;
+    const storedPage = await repository.store(Sector, ctx.request.body.pageid, ctx.request.body);
+    if(!storedPage){
+      ctx.status = 403;
+    } else {
+      ctx.body = {pageid: storedPage.pageid, status: true};
+    }
   })
   .put('/:pageId', authentication, async (ctx, next)=>{
-
+    const {repository} = ctx.services;
+    const updatedPage = await repository.update(Sector, ctx.request.body.pageid, ctx.request.body);
+    if(!updatedPage){
+      ctx.status = 404;
+    } else {
+      ctx.body = {pageid: updatedPage.pageid, status: true};
+    }
   })
   .del('/:pageId', authentication, async (ctx, next)=>{
-
+    const {repository} = ctx.services;
+    const removedPage = await repository.remove(Sector, ctx.request.body.pageid, ctx.request.body);
+    if(!removedPage){
+      ctx.status = 404;
+    } else {
+      ctx.body = {pageid: removedPage.pageid, status: true};
+    }
   });
 
 export {pages};
