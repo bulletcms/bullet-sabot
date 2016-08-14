@@ -1,7 +1,7 @@
 {
   "name": "bullet-sabot",
   "version": "0.1.0",
-  "description": "a web server for bullet-cms",
+  "description": "a web server for bulletcms",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
