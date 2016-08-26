@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
+import Cors from 'kcors';
 import Logger from 'koa-logger';
 
 import {MockRepo} from 'services/repository';
@@ -45,6 +46,7 @@ class Sabot {
     */
     this.app_
       .use(Logger())
+      .use(Cors())
       .use(router.routes())
       .use(router.allowedMethods());
   }
