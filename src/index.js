@@ -8,7 +8,7 @@ import Logger from 'koa-logger';
 import {MockRepo} from 'services/repository';
 import {GoogleAuth} from 'services/authentication';
 
-import {users, pages} from 'routes';
+import {users, pages, config} from 'routes';
 
 const Services = {MockRepo, GoogleAuth};
 
@@ -31,7 +31,8 @@ class Sabot {
 
     api
       .use('/users', users.routes(), users.allowedMethods())
-      .use('/pages', pages.routes(), pages.allowedMethods());
+      .use('/pages', pages.routes(), pages.allowedMethods())
+      .use('/config', config.routes(), config.allowedMethods());
 
     /**
     app routes

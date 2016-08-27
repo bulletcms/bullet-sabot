@@ -36,24 +36,35 @@ pages
     } else {
       ctx.body = {pageid: storedPage.pageid, status: true};
     }
+    await next();
   })
   .put('/:pageId', authentication, async (ctx, next)=>{
-    const {repository} = ctx.services;
-    const updatedPage = await repository.update(Sector, ctx.request.body.pageid, ctx.request.body);
-    if(!updatedPage){
-      ctx.status = 404;
+    if(ctx.request.body.pageid !== ctx.params.pageId){
+      ctx.status = 409;
     } else {
-      ctx.body = {pageid: updatedPage.pageid, status: true};
+      const {repository} = ctx.services;
+      const updatedPage = await repository.update(Sector, ctx.request.body.pageid, ctx.request.body);
+      if(!updatedPage){
+        ctx.status = 404;
+      } else {
+        ctx.body = {pageid: updatedPage.pageid, status: true};
+      }
     }
+    await next();
   })
   .del('/:pageId', authentication, async (ctx, next)=>{
-    const {repository} = ctx.services;
-    const removedPage = await repository.remove(Sector, ctx.request.body.pageid, ctx.request.body);
-    if(!removedPage){
-      ctx.status = 404;
+    if(ctx.request.body.pageid !== ctx.params.pageId){
+      ctx.status = 409;
     } else {
-      ctx.body = {pageid: removedPage.pageid, status: true};
+      const {repository} = ctx.services;
+      const removedPage = await repository.remove(Sector, ctx.request.body.pageid);
+      if(!removedPage){
+        ctx.status = 404;
+      } else {
+        ctx.body = {pageid: removedPage.pageid, status: true};
+      }
     }
+    await next();
   });
 
 export {pages};

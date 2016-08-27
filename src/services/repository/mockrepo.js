@@ -64,6 +64,7 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
   },
   'Config': {
     'navigation': {
+      'configid': 'navigation',
       'brand': ['https://git-scm.com/images/logos/downloads/Git-Icon-Black.png', '/'],
       'list': [
         ['Home', '/'],

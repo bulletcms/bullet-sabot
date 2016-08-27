@@ -23,6 +23,7 @@ users
       }
       ctx.body = returnedUser;
     }
+    await next();
   })
   .get('/:username/private', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -32,6 +33,7 @@ users
     } else {
       ctx.body = retrievedUser;
     }
+    await next();
   })
   .post('/', async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -41,24 +43,35 @@ users
     } else {
       ctx.body = {username: storedUser.username, status: true};
     }
+    await next();
   })
   .put('/:username', authentication, async (ctx, next)=>{
-    const {repository} = ctx.services;
-    const updatedUser = await repository.update(Sector, ctx.request.body.username, ctx.request.body);
-    if(!updatedUser){
-      ctx.status = 404;
+    if(ctx.request.body.username !== ctx.params.username){
+      ctx.status = 409;
     } else {
-      ctx.body = {username: updatedUser.username, status: true};
+      const {repository} = ctx.services;
+      const updatedUser = await repository.update(Sector, ctx.request.body.username, ctx.request.body);
+      if(!updatedUser){
+        ctx.status = 404;
+      } else {
+        ctx.body = {username: updatedUser.username, status: true};
+      }
     }
+    await next();
   })
   .del('/:username', authentication, async (ctx, next)=>{
-    const {repository} = ctx.services;
-    const removedUser = await repository.remove(Sector, ctx.request.body.username);
-    if(!removedUser){
-      ctx.status = 404;
+    if(ctx.request.body.username !== ctx.params.username){
+      ctx.status = 409;
     } else {
-      ctx.body = {username: removedUser.username, status: true};
+      const {repository} = ctx.services;
+      const removedUser = await repository.remove(Sector, ctx.request.body.username);
+      if(!removedUser){
+        ctx.status = 404;
+      } else {
+        ctx.body = {username: removedUser.username, status: true};
+      }
     }
+    await next();
   });
 
 export {users};
