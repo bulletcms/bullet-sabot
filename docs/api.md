@@ -30,7 +30,7 @@ request:
 response:
 ```json
 {
-  "title": "Page Name",
+  "pageid": "<pageid>",
   "status": "<true | false>"
 }
 ```
