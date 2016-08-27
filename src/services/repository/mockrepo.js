@@ -61,6 +61,19 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
       'tags': ['admin', 'mod', 'editor', 'user'],
       'public': ['name', 'lastName', 'fullName', 'profilePicture', 'tags']
     }
+  },
+  'Config': {
+    'navigation': {
+      'brand': ['https://git-scm.com/images/logos/downloads/Git-Icon-Black.png', '/'],
+      'list': [
+        ['Home', '/'],
+        ['Kevin', '/kevin'],
+        ['About', '/about']
+      ],
+      'listRight': [
+
+      ]
+    }
   }
 };
 
