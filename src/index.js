@@ -13,7 +13,7 @@ import {users, pages, config} from 'routes';
 const Services = {MockRepo, GoogleAuth};
 
 class Sabot {
-  constructor(dependencies){
+  constructor(dependencies, log=false){
     /**
     application
     */
@@ -45,8 +45,11 @@ class Sabot {
     /**
     middleware
     */
-    this.app_
+    if(log){
+      this.app_
       .use(Logger())
+    }
+    this.app_
       .use(Cors())
       .use(router.routes())
       .use(router.allowedMethods());
