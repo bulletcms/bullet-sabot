@@ -10,7 +10,7 @@ const theRepo = {
       'title': 'Kevin',
       'tags': [],
       'content':
-` {Section ||||
+`{Section ||||
 # Kevin
 
 Hi, I am Kevin.
