@@ -24,7 +24,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
     }
 
     // if username does not match idToken
-    if(user.googleId == reqUser.googleId){
+    if(user.googleId !== reqUser.googleId){
       ctx.status = 403;
       return;
     }
