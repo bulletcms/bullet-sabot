@@ -38,8 +38,11 @@ const Authenticator = (userCheck, permissionTiers)=>{
         return;
       }
 
-      // or if permissionTiers present
-    } else if(permissionTiers){
+
+    }
+
+    // if permissionTiers present
+    if(permissionTiers){
       let intersection = false;
       for(let i of permissionTiers){
         if(user.tags.indexOf(i) > -1){
