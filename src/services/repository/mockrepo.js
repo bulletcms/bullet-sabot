@@ -48,11 +48,12 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
     'xorkevin': {
       'username': 'xorkevin',
       'name': 'Kevin',
-      'lastName': 'Wang',
       'fullName': 'Kevin Wang',
-      'email': 'example@example.com',
+      'lastName': 'Wang',
+      'email': 'wangkevin448@gmail.com',
       'emailVerified': true,
-      'profilePicture': false,
+      'googleId': '109746574728252414836',
+      'profilePicture': 'https://lh3.googleusercontent.com/-sfQVmRfEEJc/AAAAAAAAAAI/AAAAAAAAAhY/zklmzOJsao0/s96-c/photo.jpg',
       'tags': ['admin', 'mod', 'editor', 'user'],
       'public': ['name', 'lastName', 'fullName', 'profilePicture', 'tags']
     }
