@@ -34,8 +34,7 @@ class GoogleAuth extends Authentication {
       return false;
     }
     const KId = decodedToken.header.kid;
-    const cert = await getGoogleCerts(KId);
-
+    const cert = await this.getGoogleCerts(KId);
     const options = {
       audience: this.clientSecret_.client_id,
       issuer: ['accounts.google.com', 'https://accounts.google.com']
@@ -43,20 +42,14 @@ class GoogleAuth extends Authentication {
 
     try {
       const decoded = jwt.verify(token, cert, options);
-      if(issuers.indexOf(decoded.payload.iss) < 0){
-        return false;
-      } else {
-        const payload = decoded.payload;
-
-        const name = payload.given_name;
-        const fullName = payload.name;
-        const lastName = payload.family_name;
-        const email = payload.email;
-        const emailVerified = payload.email_verified;
-        const googleId = payload.sub;
-        const profilePicture = payload.picture;
-        return {name, fullName, lastName, email, emailVerified, googleId, profilePicture};
-      }
+      const name = decoded.given_name;
+      const fullName = decoded.name;
+      const lastName = decoded.family_name;
+      const email = decoded.email;
+      const emailVerified = decoded.email_verified;
+      const googleId = decoded.sub;
+      const profilePicture = decoded.picture;
+      return {name, fullName, lastName, email, emailVerified, googleId, profilePicture};
     } catch(err){
       return false;
     }
