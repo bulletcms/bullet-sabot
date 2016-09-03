@@ -20,10 +20,12 @@ request:
 {
   "username": "<username>",
   "idToken": "<id_token>",
-  "pageid": "<pageid>",
-  "title": "Page Name",
-  "tags": ["tag-1", "tag-2"],
-  "content": ["<bulletmark here>"]
+  "data": {
+    "pageid": "<pageid>",
+    "title": "Page Name",
+    "tags": ["tag-1", "tag-2"],
+    "content": ["<bulletmark here>"]
+  }
 }
 ```
 
