@@ -115,6 +115,8 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
   }
 };
 
+traverse('Pages', 'kevin', {pageid: 'kevin'}, true);
+
 class MockRepo extends Repository {
   constructor(){
     super();

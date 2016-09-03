@@ -14,8 +14,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
       ctx.status = 403;
       return;
     }
-
-    const user = await repository.retrieve(username);
+    const user = await repository.retrieve('Users', username);
 
     // if username is invalid
     if(!user){

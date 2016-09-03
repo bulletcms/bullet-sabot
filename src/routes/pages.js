@@ -30,7 +30,7 @@ pages
   })
   .post('/', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
-    const storedPage = await repository.store(Sector, ctx.request.body.pageid, ctx.request.body);
+    const storedPage = await repository.store(Sector, ctx.request.body.pageid, ctx.request.body.data);
     if(!storedPage){
       ctx.status = 403;
     } else {
@@ -39,11 +39,11 @@ pages
     await next();
   })
   .put('/:pageId', authentication, async (ctx, next)=>{
-    if(ctx.request.body.pageid !== ctx.params.pageId){
+    if(ctx.request.body.data.pageid !== ctx.params.pageId){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const updatedPage = await repository.update(Sector, ctx.request.body.pageid, ctx.request.body);
+      const updatedPage = await repository.update(Sector, ctx.request.body.data.pageid, ctx.request.body.data);
       if(!updatedPage){
         ctx.status = 404;
       } else {
