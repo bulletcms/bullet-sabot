@@ -30,7 +30,7 @@ pages
   })
   .post('/', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
-    const storedPage = await repository.store(Sector, ctx.request.body.pageid, ctx.request.body.data);
+    const storedPage = await repository.store(Sector, ctx.request.body.data.pageid, ctx.request.body.data);
     if(!storedPage){
       ctx.status = 403;
     } else {
@@ -53,11 +53,11 @@ pages
     await next();
   })
   .del('/:pageId', authentication, async (ctx, next)=>{
-    if(ctx.request.body.pageid !== ctx.params.pageId){
+    if(ctx.request.body.data.pageid !== ctx.params.pageId){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const removedPage = await repository.remove(Sector, ctx.request.body.pageid);
+      const removedPage = await repository.remove(Sector, ctx.request.body.data.pageid);
       if(!removedPage){
         ctx.status = 404;
       } else {
