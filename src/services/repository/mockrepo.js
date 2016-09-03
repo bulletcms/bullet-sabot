@@ -79,12 +79,12 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
 
 const traverse = (object, sector, data=NotDefined, update=false)=>{
   if(typeof sector == 'string'){
-    return traverse(object, sector.split('.'), data);
+    return traverse(object, sector.split('.'), data, update);
   } else if(sector.length > 1){
     if(!object[sector[0]]){
       return false;
     }
-    return traverse(object[sector.shift()], sector, data);
+    return traverse(object[sector.shift()], sector, data, update);
   } else if(sector.length == 0){
     return object;
   } else {
@@ -114,8 +114,6 @@ const traverse = (object, sector, data=NotDefined, update=false)=>{
     return object[sector[0]];
   }
 };
-
-traverse('Pages', 'kevin', {pageid: 'kevin'}, true);
 
 class MockRepo extends Repository {
   constructor(){
