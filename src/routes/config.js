@@ -30,7 +30,7 @@ config
   })
   .post('/', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
-    const storedConfig = await repository.store(Sector, ctx.request.body.configid, ctx.request.body);
+    const storedConfig = await repository.store(Sector, ctx.request.body.data.configid, ctx.request.body.data);
     if(!storedConfig){
       ctx.status = 403;
     } else {
@@ -39,11 +39,11 @@ config
     await next();
   })
   .put('/:configId', authentication, async (ctx, next)=>{
-    if(ctx.request.body.configid !== ctx.params.configId){
+    if(ctx.request.body.data.configid !== ctx.params.configId){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const updatedConfig = await repository.update(Sector, ctx.request.body.configid, ctx.request.body);
+      const updatedConfig = await repository.update(Sector, ctx.request.body.data.configid, ctx.request.body.data);
       if(!updatedConfig){
         ctx.status = 404;
       } else {
@@ -53,11 +53,11 @@ config
     await next();
   })
   .del('/:configId', authentication, async (ctx, next)=>{
-    if(ctx.request.body.configid !== ctx.params.configId){
+    if(ctx.request.body.data.configid !== ctx.params.configId){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const removedConfig = await repository.remove(Sector, ctx.request.body.configid);
+      const removedConfig = await repository.remove(Sector, ctx.request.body.data.configid);
       if(!removedConfig){
         ctx.status = 404;
       } else {
