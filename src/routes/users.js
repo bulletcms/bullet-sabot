@@ -38,13 +38,14 @@ users
     await next();
   })
   .post('/', async (ctx, next)=>{
-    if(ctx.request.body.tags){
+    if(ctx.request.body.data.tags){
       ctx.status = 403;
     } else {
       const {repository} = ctx.services;
-      let user = ctx.request.body;
+      let user = ctx.request.body.data;
       user.tags = ['user'];
-      const storedUser = await repository.store(Sector, ctx.request.body.username, ctx.request.body);
+      user.public = ['name', 'lastName', 'fullName', 'profilePicture', 'tags'];
+      const storedUser = await repository.store(Sector, ctx.request.body.data.username, user);
       if(!storedUser){
         ctx.status = 403;
       } else {
@@ -54,14 +55,14 @@ users
     await next();
   })
   .put('/:username', authentication, async (ctx, next)=>{
-    if(ctx.request.body.tags){
+    if(ctx.request.body.data.tags){
       ctx.status = 403;
     } else {
-      if(ctx.request.body.username !== ctx.params.username){
+      if(ctx.request.body.data.username !== ctx.params.username){
         ctx.status = 409;
       } else {
         const {repository} = ctx.services;
-        const updatedUser = await repository.update(Sector, ctx.request.body.username, ctx.request.body);
+        const updatedUser = await repository.update(Sector, ctx.request.body.data.username, ctx.request.body.data);
         if(!updatedUser){
           ctx.status = 404;
         } else {
@@ -72,11 +73,11 @@ users
     await next();
   })
   .put('/:username/tags', authenticationAdmin, async (ctx, next)=>{
-    if(ctx.request.body.username !== ctx.params.username){
+    if(ctx.request.body.data.username !== ctx.params.username){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const updatedUser = await repository.update(Sector, ctx.request.body.username, ctx.request.body);
+      const updatedUser = await repository.update(Sector, ctx.request.body.data.username, ctx.request.body.data);
       if(!updatedUser){
         ctx.status = 404;
       } else {
@@ -85,11 +86,11 @@ users
     }
   })
   .del('/:username', authentication, async (ctx, next)=>{
-    if(ctx.request.body.username !== ctx.params.username){
+    if(ctx.request.body.data.username !== ctx.params.username){
       ctx.status = 409;
     } else {
       const {repository} = ctx.services;
-      const removedUser = await repository.remove(Sector, ctx.request.body.username);
+      const removedUser = await repository.remove(Sector, ctx.request.body.data.username);
       if(!removedUser){
         ctx.status = 404;
       } else {
