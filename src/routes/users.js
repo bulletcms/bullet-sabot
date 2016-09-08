@@ -6,7 +6,7 @@ const Sector = 'Users';
 const authentication = Authenticator(async (username, params, services)=>{
   const {username: userId} = params;
   return username == userId;
-});
+}, ['admin']);
 
 const authenticationAdmin = Authenticator(false, ['admin']);
 
