@@ -5,7 +5,15 @@ const Authenticator = (userCheck, permissionTiers)=>{
   */
   return async (ctx, next)=>{
     const {authentication, repository} = ctx.services;
-    const {username, idToken} = ctx.request.body;
+    let username;
+    let idToken;
+    if(ctx.request.body.username){
+      username = ctx.request.body.username;
+      idToken = ctx.request.body.idToken;
+    } else {
+      username = ctx.request.get('username');
+      idToken = ctx.request.get('idToken');
+    }
 
     const reqUser = await authentication.verify(idToken);
 
@@ -38,8 +46,7 @@ const Authenticator = (userCheck, permissionTiers)=>{
       }
 
 
-    }
-
+    } else
     // if permissionTiers present
     if(permissionTiers){
       let intersection = false;
