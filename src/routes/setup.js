@@ -21,7 +21,7 @@ setup
       const {repository} = ctx.services;
       const getSetup = await repository.retrieve(Sector, 'setup');
       if(getSetup){
-        cts.status = 403;
+        ctx.status = 403;
       } else {
         let user = ctx.request.body.data;
         user.tags = ['admin', 'mod', 'editor', 'user'];
