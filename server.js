@@ -8,7 +8,9 @@ const sabot = new Sabot(
     authentication: new Services.GoogleAuth(require('./client_secret.json').web),
   },
   {
-    log: true
+    log: true,
+    staticMaxAge: 2048000,
+    dynamicMaxAge: 64000
   }
 );
 
