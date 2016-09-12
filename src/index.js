@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
+import Serve from 'koa-static';
 import BodyParser from 'koa-bodyparser';
 import Cors from 'kcors';
 import Logger from 'koa-logger';
@@ -13,7 +14,7 @@ import routes from 'routes';
 const Services = {GoogleDatastore, GoogleAuth};
 
 class Sabot {
-  constructor(dependencies, log=false){
+  constructor(dependencies, opts={}){
     /**
     application
     */
@@ -25,19 +26,31 @@ class Sabot {
     this.app_.context.services = dependencies;
 
     /**
+     * opts
+     */
+    const {log, serve, dashboardPath, indexPath, cacheMaxAge} = opts;
+    const serveOpts = {maxage: cacheMaxAge || 128000};
+
+    /**
     app routes
     */
     const router = new Router();
 
     router
-      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods());
+      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods())
+      .use('/dashboard', Serve(dashboardPath, serveOpts))
+      .use(/(|^$)/, Serve(indexPath, serveOpts));
 
     /**
     middleware
     */
     if(log){
       this.app_
-      .use(Logger())
+        .use(Logger());
+    }
+    if(serve){
+      this.app_
+        .use(Serve(serve, serveOpts));
     }
     this.app_
       .use(Cors())
