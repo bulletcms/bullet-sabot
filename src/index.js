@@ -5,12 +5,12 @@ import BodyParser from 'koa-bodyparser';
 import Cors from 'kcors';
 import Logger from 'koa-logger';
 
-import {MockRepo} from 'services/repository';
+import {GoogleDatastore} from 'services/repository';
 import {GoogleAuth} from 'services/authentication';
 
 import routes from 'routes';
 
-const Services = {MockRepo, GoogleAuth};
+const Services = {GoogleDatastore, GoogleAuth};
 
 class Sabot {
   constructor(dependencies, log=false){
