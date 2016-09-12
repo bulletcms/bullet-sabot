@@ -10,7 +10,7 @@ class Repository {
     data     - the data
     quantity - amount of keys to retrieve, blank for all keys
   */
-  retrieve(sector, id){
+  async retrieve(sector, id){
     /**
     gets item
     returns item or false
@@ -18,7 +18,7 @@ class Repository {
     abstractMethod();
   }
 
-  retrieveSector(sector, quantity){
+  async retrieveSector(sector, quantity){
     /**
     gets item keys of a sector
     returns array of keys or false
@@ -26,7 +26,7 @@ class Repository {
     abstractMethod();
   }
 
-  store(sector, id, data){
+  async store(sector, id, data){
     /**
     stores item
     returns new data or false if id already exists
@@ -34,7 +34,7 @@ class Repository {
     abstractMethod();
   }
 
-  update(sector, id, data){
+  async update(sector, id, data){
     /**
     update item
     returns new data or false
@@ -42,7 +42,7 @@ class Repository {
     abstractMethod();
   }
 
-  remove(sector, id){
+  async remove(sector, id){
     /**
     delete item
     returns deleted data or false

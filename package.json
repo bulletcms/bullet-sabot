@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/bulletcms/bullet-sabot#readme",
   "dependencies": {
+    "google-cloud": "^0.40.0",
     "jsonwebtoken": "^7.1.7",
     "kcors": "^2.1.1",
     "koa": "^2.0.0",
