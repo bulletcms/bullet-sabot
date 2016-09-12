@@ -1,4 +1,4 @@
-import {echo} from './echo';
 import {Authenticator} from './authentication';
+import {CacheControl} from './cacheControl';
 
-export {echo, Authenticator};
+export {Authenticator, cacheControl};

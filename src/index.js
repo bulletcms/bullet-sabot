@@ -28,8 +28,8 @@ class Sabot {
     /**
      * opts
      */
-    const {log, serve, dashboardPath, indexPath, cacheMaxAge} = opts;
-    const serveOpts = {maxage: cacheMaxAge || 128000};
+    const {log, serve, dashboardPath, indexPath, staticMaxAge, dynamicMaxAge} = opts;
+    const serveOpts = {maxage: staticMaxAge || 1024000}; // 17 minute cache for static objects
 
     /**
     app routes
@@ -37,9 +37,15 @@ class Sabot {
     const router = new Router();
 
     router
-      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods())
-      .use('/dashboard', Serve(dashboardPath, serveOpts))
-      .use(/(|^$)/, Serve(indexPath, serveOpts));
+      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods());
+    if(dashboardPath){
+      router
+        .use('/dashboard', Serve(dashboardPath, serveOpts));
+    }
+    if(indexPath){
+      router
+        .use(/(|^$)/, Serve(indexPath, serveOpts));
+    }
 
     /**
     middleware
