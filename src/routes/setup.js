@@ -44,16 +44,8 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
   }
 }`
         });
-        if(!storedUser || !storedPage){
-          ctx.status = 403;
-        } else {
-          const toggleSetup = await repository.store(Sector, 'setup', true);
-          if(!toggleSetup){
-            ctx.status = 409;
-          } else {
-            ctx.body = {setup: toggleSetup, status: true};
-          }
-        }
+        const toggleSetup = await repository.store(Sector, 'setup', {status: true});
+        ctx.body = {setup: toggleSetup, status: true};
       }
     }
     await next();
