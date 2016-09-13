@@ -1,9 +1,11 @@
 import Router from 'koa-router';
-import {Authenticator} from 'middleware';
+import {Authenticator, CacheControl} from 'middleware';
 
 const Sector = 'Config';
 
 const authentication = Authenticator(false, ['editor']);
+
+const cache = CacheControl('dynamicMaxAge');
 
 const config = new Router();
 
@@ -18,7 +20,7 @@ config
     }
     await next();
   })
-  .get('/:configId', async (ctx, next)=>{
+  .get('/:configId', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
     const retrievedConfig = await repository.retrieve(Sector, ctx.params.configId);
     if(!retrievedConfig){

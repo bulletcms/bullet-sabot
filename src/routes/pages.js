@@ -5,10 +5,12 @@ const Sector = 'Pages';
 
 const authentication = Authenticator(false, ['editor']);
 
+const cache = CacheControl('dynamicMaxAge');
+
 const pages = new Router();
 
 pages
-  .get('/', async (ctx, next)=>{
+  .get('/', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
     const retrievedPages = await repository.retrieveSector(Sector);
     if(!retrievedPages){
@@ -18,7 +20,7 @@ pages
     }
     await next();
   })
-  .get('/:pageId', async (ctx, next)=>{
+  .get('/:pageId', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
     const retrievedPage = await repository.retrieve(Sector, ctx.params.pageId);
     if(!retrievedPage){

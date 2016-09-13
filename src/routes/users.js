@@ -10,10 +10,12 @@ const authentication = Authenticator(async (username, params, services)=>{
 
 const authenticationAdmin = Authenticator(false, ['admin']);
 
+const cache = CacheControl('dynamicMaxAge');
+
 const users = new Router();
 
 users
-  .get('/:username', async (ctx, next)=>{
+  .get('/:username', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
     const retrievedUser = await repository.retrieve(Sector, ctx.params.username);
     if(!retrievedUser){
