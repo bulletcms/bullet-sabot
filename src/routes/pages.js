@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import {Authenticator} from 'middleware';
+import {Authenticator, CacheControl} from 'middleware';
 
 const Sector = 'Pages';
 

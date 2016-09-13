@@ -1,3 +1,4 @@
 import {GoogleDatastore} from './googledatastore';
+import {MockRepo} from './mockrepo';
 
-export {GoogleDatastore};
+export {GoogleDatastore, MockRepo};
