@@ -31,7 +31,7 @@ class Sabot {
     const {log, servePath, dashboardPath, indexPath, staticMaxAge} = opts;
     const serveOpts = {maxage: staticMaxAge*1000 || 16384*1000}; // 4.5 hour cache for static objects
     const defaultOpts = {dynamicMaxAge: 128}; // 2 minute cache for dynamic objects
-    this.app_.context.opts = {...dynamicMaxAge, ...opts};
+    this.app_.context.opts = {...defaultOpts, ...opts};
 
     /**
     app routes
