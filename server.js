@@ -9,8 +9,8 @@ const sabot = new Sabot(
   },
   {
     log: true,
-    staticMaxAge: 2048000,
-    dynamicMaxAge: 64000
+    staticMaxAge: 16384,
+    dynamicMaxAge: 128
   }
 );
 
