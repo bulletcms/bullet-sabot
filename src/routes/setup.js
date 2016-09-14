@@ -35,8 +35,18 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
   }
 }`
         });
+        const storedConfig = await repository.store('Config', 'navigation', {
+          'configid': 'navigation',
+          'brand': ['https://git-scm.com/images/logos/downloads/Git-Icon-Black.png', '/'],
+          'list': [
+            ['Home', '/']
+          ],
+          'listRight': [
+
+          ]
+        })
         const toggleSetup = await repository.update(Sector, 'setup', {status: true});
-        ctx.body = {setup: toggleSetup, status: true};
+        ctx.body = {status: true};
       }
     }
     await next();

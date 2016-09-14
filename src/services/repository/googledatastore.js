@@ -1,6 +1,41 @@
 import GoogleCloud from 'google-cloud';
 import {Repository} from './repo';
 
+const convertData = (dataObject)=>{
+  const arr = [];
+  for(let prop in dataObject){
+    const obj = {
+      name: prop,
+      value: dataObject[prop],
+      excludeFromIndexes: typeof dataObject[prop] == 'string' && Buffer.byteLength(dataObject[prop], 'utf8') > 1024
+    };
+    if(Array.isArray(obj.value) && obj.value.length > 0 && Array.isArray(obj.value[0])){
+      obj.value = obj.value.map((i)=>{
+        return JSON.stringify(i);
+      });
+    }
+    arr.push(obj);
+  }
+  return arr;
+};
+
+const invertData = (dataObject)=>{
+  const obj = dataObject;
+  for(let prop in obj){
+    if(Array.isArray(obj[prop]) && obj[prop].length > 0){
+      try {
+        JSON.parse(obj[prop][0]);
+        obj[prop] = obj[prop].map((i)=>{
+          return JSON.parse(i);
+        });
+      } catch(err){
+
+      }
+    }
+  }
+  return obj;
+};
+
 class GoogleDatastore extends Repository {
   constructor(projectId, keyFilename){
     super();
@@ -23,7 +58,11 @@ class GoogleDatastore extends Repository {
         if(err){
           return resolve(false);
         } else {
-          return resolve(entity.data);
+          if(entity){
+            return resolve(invertData(entity.data));
+          } else {
+            return resolve(false);
+          }
         }
       });
     });
@@ -58,7 +97,7 @@ class GoogleDatastore extends Repository {
     return new Promise((resolve, reject)=>{
       this.datastore.insert({
         key: this.datastore.key([...sector.split('.'), id]),
-        data: data
+        data: convertData(data)
       }, (err)=>{
         if(err){
           return resolve(false);
@@ -73,7 +112,7 @@ class GoogleDatastore extends Repository {
     return new Promise((resolve, reject)=>{
       this.datastore.update({
         key: this.datastore.key([...sector.split('.'), id]),
-        data: data
+        data: convertData(data)
       }, (err)=>{
         if(err){
           return resolve(false);
