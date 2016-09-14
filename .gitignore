@@ -1,4 +1,5 @@
 node_modules
 lib
 client_secret.json
+service_account_key.json
 npm-debug.log

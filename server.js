@@ -9,6 +9,7 @@ const sabot = new Sabot(
   },
   {
     log: true,
+    servePath: __dirname + '/public',
     staticMaxAge: 16384,
     dynamicMaxAge: 128
   }
