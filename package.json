@@ -1,6 +1,6 @@
 {
   "name": "bullet-sabot",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "a web server for bulletcms",
   "main": "lib/index.js",
   "scripts": {
