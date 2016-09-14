@@ -1,6 +1,6 @@
 {
   "name": "bullet-sabot",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a web server for bulletcms",
   "main": "lib/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "koa-bodyparser": "^3.2.0",
     "koa-logger": "^2.0.0",
     "koa-router": "^7.0.1",
+    "koa-send": "^3.2.0",
     "koa-static": "^3.0.0",
     "murmurhash3js": "^3.0.1",
     "node-fetch": "^1.6.0"

@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
+import Send from 'koa-send';
 import Serve from 'koa-static';
 import BodyParser from 'koa-bodyparser';
 import Cors from 'kcors';
@@ -40,14 +41,6 @@ class Sabot {
 
     router
       .use('/api', BodyParser(), routes.routes(), routes.allowedMethods());
-    if(dashboardPath){
-      router
-        .use('/dashboard', Serve(dashboardPath, serveOpts));
-    }
-    if(indexPath){
-      router
-        .use(/(|^$)/, Serve(indexPath, serveOpts));
-    }
 
     /**
     middleware
