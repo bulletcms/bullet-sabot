@@ -68,7 +68,7 @@ class GoogleDatastore extends Repository {
     });
   }
 
-  async retrieveSector(sector, opts){
+  async retrieveSector(sector, opts={}){
     const {limit, offset, filters} = opts;
     return new Promise((resolve, reject)=>{
       let query = this.datastore.createQuery(sector).select('__key__');
@@ -87,7 +87,7 @@ class GoogleDatastore extends Repository {
         if(err){
           return resolve(false);
         } else {
-          return resolve(entities.map((value)=>{return value.pop();}));
+          return resolve(entities.map((value)=>{return value.key.name;}));
         }
       })
     });
