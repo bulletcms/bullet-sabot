@@ -4,7 +4,7 @@ const Services = BulletSabot.Services;
 
 const sabot = new Sabot(
   {
-    repository   : new Services.MockRepo(),
+    repository   : new Services.GoogleDatastore(require('./service_account_key.json').project_id, require('./service_account_key.json')),
     authentication: new Services.GoogleAuth(require('./client_secret.json').web),
   },
   {

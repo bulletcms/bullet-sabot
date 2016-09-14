@@ -4,10 +4,17 @@ import {Repository} from './repo';
 class GoogleDatastore extends Repository {
   constructor(projectId, keyFilename){
     super();
-    this.datastore = GoogleCloud.datastore({
-      projectId: projectId,
-      keyFilename: keyFilename
-    });
+    if(typeof keyFilename == 'string'){
+      this.datastore = GoogleCloud.datastore({
+        projectId: projectId,
+        keyFilename: keyFilename
+      });
+    }else {
+      this.datastore = GoogleCloud.datastore({
+        projectId: projectId,
+        credentials: keyFilename
+      });
+    }
   }
 
   async retrieve(sector, id){
