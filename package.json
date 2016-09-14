@@ -1,8 +1,8 @@
 {
   "name": "bullet-sabot",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "a web server for bulletcms",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-dev": "webpack --watch -d --progress --colors",

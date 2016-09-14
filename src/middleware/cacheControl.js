@@ -6,12 +6,12 @@ const CacheControl = (maxage)=>{
 
   if(typeof maxage == 'string'){
     return async (ctx, next)=>{
-      ctx.set('Cache-Control', ctx.opts[k]);
+      ctx.set('Cache-Control', `max-age=${ctx.opts[k]}`);
       await next();
     };
   } else {
     return async (ctx, next)=>{
-      ctx.set('Cache-Control', k);
+      ctx.set('Cache-Control', `max-age=${k}`);
       await next();
     };
   }
