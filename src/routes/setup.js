@@ -49,7 +49,6 @@ Maecenas vulputate nec mi non posuere. Vestibulum malesuada erat justo, at aliqu
         ctx.body = {status: true};
       }
     }
-    await next();
   });
 
 export {setup};

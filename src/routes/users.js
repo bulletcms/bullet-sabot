@@ -27,7 +27,6 @@ users
       }
       ctx.body = returnedUser;
     }
-    await next();
   })
   .get('/:username/private', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -37,7 +36,6 @@ users
     } else {
       ctx.body = retrievedUser;
     }
-    await next();
   })
   .post('/', async (ctx, next)=>{
     if(ctx.request.body.data.tags){
@@ -54,7 +52,6 @@ users
         ctx.body = {username: storedUser.username, status: true};
       }
     }
-    await next();
   })
   .put('/:username', authentication, async (ctx, next)=>{
     if(ctx.request.body.data.tags){
@@ -72,7 +69,6 @@ users
         }
       }
     }
-    await next();
   })
   .put('/:username/tags', authenticationAdmin, async (ctx, next)=>{
     if(ctx.request.body.data.username !== ctx.params.username){
@@ -99,7 +95,6 @@ users
         ctx.body = {username: removedUser.username, status: true};
       }
     }
-    await next();
   });
 
 export {users};

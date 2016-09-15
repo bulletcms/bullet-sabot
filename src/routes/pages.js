@@ -18,7 +18,6 @@ pages
     } else {
       ctx.body = retrievedPages;
     }
-    await next();
   })
   .get('/:pageId', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -28,7 +27,6 @@ pages
     } else {
       ctx.body = retrievedPage;
     }
-    await next();
   })
   .post('/', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -38,7 +36,6 @@ pages
     } else {
       ctx.body = {pageid: storedPage.pageid, status: true};
     }
-    await next();
   })
   .put('/:pageId', authentication, async (ctx, next)=>{
     if(ctx.request.body.data.pageid !== ctx.params.pageId){
@@ -52,7 +49,6 @@ pages
         ctx.body = {pageid: updatedPage.pageid, status: true};
       }
     }
-    await next();
   })
   .del('/:pageId', authentication, async (ctx, next)=>{
     if(ctx.request.body.data.pageid !== ctx.params.pageId){
@@ -66,7 +62,6 @@ pages
         ctx.body = {pageid: removedPage.pageid, status: true};
       }
     }
-    await next();
   });
 
 export {pages};

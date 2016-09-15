@@ -40,7 +40,13 @@ class Sabot {
     const router = new Router();
 
     router
-      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods());
+      .use('/api', BodyParser(), routes.routes(), routes.allowedMethods())
+      .get('/*', async (ctx, next)=>{
+        if(/^\/[A-Za-z0-9_\-\/]+$/.test(ctx.path)){
+          console.log('triggered');
+          await Send(ctx, '/index.html', {...serveOpts, root: servePath});
+        }
+      });
 
     /**
     middleware
@@ -49,14 +55,17 @@ class Sabot {
       this.app_
         .use(Logger());
     }
+
     if(servePath){
       this.app_
-        .use(Serve(servePath, serveOpts));
+      .use(Serve(servePath, serveOpts));
     }
+
     this.app_
       .use(Cors())
       .use(router.routes())
       .use(router.allowedMethods());
+
   }
 
   listen(port){

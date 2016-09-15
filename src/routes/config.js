@@ -18,7 +18,6 @@ config
     } else {
       ctx.body = retrievedConfigs;
     }
-    await next();
   })
   .get('/:configId', cache, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -28,7 +27,6 @@ config
     } else {
       ctx.body = retrievedConfig;
     }
-    await next();
   })
   .post('/', authentication, async (ctx, next)=>{
     const {repository} = ctx.services;
@@ -38,7 +36,6 @@ config
     } else {
       ctx.body = {configid: storedConfig.configid, status: true};
     }
-    await next();
   })
   .put('/:configId', authentication, async (ctx, next)=>{
     if(ctx.request.body.data.configid !== ctx.params.configId){
@@ -52,7 +49,6 @@ config
         ctx.body = {configid: updatedConfig.configid, status: true};
       }
     }
-    await next();
   })
   .del('/:configId', authentication, async (ctx, next)=>{
     if(ctx.request.body.data.configid !== ctx.params.configId){
@@ -66,7 +62,6 @@ config
         ctx.body = {configid: removedConfig.configid, status: true};
       }
     }
-    await next();
   });
 
 export {config};

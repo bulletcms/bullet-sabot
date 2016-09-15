@@ -9,8 +9,6 @@ login.post('/', async (ctx, next)=>{
   const reqUser = await authentication.verify(idToken);
 
   ctx.body = reqUser;
-
-  await next();
 });
 
 export {login};
